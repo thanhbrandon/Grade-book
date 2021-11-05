@@ -4,19 +4,19 @@
 
 using namespace std;
 
-void gradeBook(double grades[5][4], int numStudents, string studentNames[5]) {
-    double averageGrades[5];
-    double gradeSum = 0;
-    char letterGrades[5];
-    for (int index = 0; index < numStudents; index++) {
+void gradeBook(double grades[5][4], int numStudents, string studentNames[5]) { // The gradeBook function averages all the grades and outputs letter grades for the students
+    double averageGrades[5]; // Double array that holds grade averages
+    double gradeSum = 0; // Temp variable to hold individual grade sums
+    char letterGrades[5]; // char array that holds letter grades
+    for (int index = 0; index < numStudents; index++) { // For loop that sums all the grades for an individual
         for (int j = 0; j < 4; j++) {
-            gradeSum = gradeSum + grades[j][index];
+            gradeSum = gradeSum + grades[j][index]; // 
         }
-        averageGrades[index] = gradeSum / 4;
-        gradeSum = 0;
+        averageGrades[index] = gradeSum / 4; // Calculates the average grade for a student
+        gradeSum = 0; // Resets temp variable 
     }
 
-    for (int index = 0; index < numStudents; index++) {
+    for (int index = 0; index < numStudents; index++) { // for loop assigns a letter grade for each student
         if (averageGrades[index] >= 90) {
             letterGrades[index] = 'A';
         }
@@ -34,6 +34,7 @@ void gradeBook(double grades[5][4], int numStudents, string studentNames[5]) {
         }
     }
 
+    // Output that prints student's name and their letter grade
     cout << "Name & Letter grade\n";
     cout << "--------------------\n";
     for (int index = 0; index < numStudents; index++) {
@@ -71,33 +72,33 @@ int main() {
         while (selection < 1 || selection > 4) {
             menu(); // Prints main menu with options
             cout << "What do you want to do?: ";
-            cin >> selection;
+            cin >> selection; // Gets user input
             if (selection > 0 && selection < 5) {
                 switch (selection) {
                 case(1):
                     system("cls");
-                    if (numStudents > 4) {
+                    if (numStudents > 4) { // Checks if too many students are added to grade book
                         cout << "Too many students! Please Reset Program!\n";
                         system("pause");
                         break;
                     }
                     cout << "Enter the name of the new Student: ";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    getline(cin, name);
-                    studentNames[numStudents] = name;
+                    getline(cin, name); 
+                    studentNames[numStudents] = name; // Adds new student to array
                     numStudents++;
                     break;
 
                 case(2): {
                     system("cls");
-                    if (numStudents == 0) {
+                    if (numStudents == 0) { // Checks if there are no students to add grades for
                         cout << "No students to input grades!\n";
                         system("pause");
                         break;
                     }
-                    int columnMarker = -1;
+                    int columnMarker = -1; // columnMarker keeps track of what student grades are being inputed into
 
-                    while (columnMarker < 1 || columnMarker > numStudents) {
+                    while (columnMarker < 1 || columnMarker > numStudents) { // While loop that makes sure grades are added to an existing student
                         system("cls");
                         if (columnMarker != -1) {
                             cout << "Invalid Choice!\n";
@@ -112,7 +113,7 @@ int main() {
                     }
                     columnMarker--;
 
-                    for (int index = 0; index < 4; index++) {
+                    for (int index = 0; index < 4; index++) { // For loop that adds grades to student
                         grades[index][columnMarker] = -1;
                         while (grades[index][columnMarker] < 0 || grades[index][columnMarker] > 100) {
                             cout << "Enter grade " << index + 1 << ": ";
@@ -127,7 +128,7 @@ int main() {
                 }
                 case(3):
                     system("cls");
-                    gradeBook(grades, numStudents, studentNames);
+                    gradeBook(grades, numStudents, studentNames); // Calls gradeBook function to print student names and letter grades
                     system("pause");
                     break;
 
